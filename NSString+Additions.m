@@ -106,6 +106,11 @@
 	return [emailTest evaluateWithObject:self];  
 }
 
+-(NSString*)pluralizeForCount:(NSInteger)count {
+    if (count == 1) return self;
+    return [NSString stringWithFormat:@"%@s", self];
+}
+
 // File Size Formmatter
 + (NSString*)stringFromFileSize:(long)theSize {
 	float floatSize = theSize;

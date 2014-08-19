@@ -12,6 +12,8 @@
 + (NSString*)stringWithDeviceToken:(NSData*)deviceToken;
 -(BOOL)containsString:(NSString*)aString;
 
+-(NSString*)pluralizeForCount:(NSInteger)count;
+
 // Date Formatters
 + (NSString*)stringFromDate:(NSDate*)date;
 + (NSString*)stringFromDate:(NSDate*)date withFormat:(NSString*)format;
