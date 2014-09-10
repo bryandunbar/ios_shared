@@ -79,7 +79,6 @@
 }
 
 -(UIView*)findNextField:(UIView *)field {
-    
     int tag = field.tag + 1;
     return [self.view viewWithTag:tag];
 }

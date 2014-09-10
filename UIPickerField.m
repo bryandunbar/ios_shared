@@ -13,6 +13,7 @@
 @end
 
 @implementation UIPickerField
+@dynamic delegate;
 
 -(id)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super initWithCoder:aDecoder]) {
@@ -63,6 +64,10 @@
 -(void)setSelectedRow:(NSUInteger)row inComponent:(NSUInteger)component animated:(BOOL)animated {
     [self.picker selectRow:row inComponent:component animated:animated];
     self.text = [self displayValueForRow:row];
+    
+    if ([self.delegate respondsToSelector:@selector(pickerField:didSelectRow:inComponent:)]) {
+        [self.delegate pickerField:self didSelectRow:row inComponent:component];
+    }
 }
 
 
@@ -79,6 +84,10 @@
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     self.selectedChoice = self.choices[row];
     self.text = [self displayValueForRow:row];
+    
+    if ([self.delegate respondsToSelector:@selector(pickerField:didSelectRow:inComponent:)]) {
+        [self.delegate pickerField:self didSelectRow:row inComponent:component];
+    }
 }
 
 -(NSString*)displayValueForRow:(NSUInteger)row {
@@ -95,11 +104,10 @@
     
 }
 
--(void)pickerChanged:(id)sender {
-//    self.text = [NSDateFormatter localizedStringFromDate:self.picker.date dateStyle:self.dateStyle timeStyle:self.timeStyle];
-//    
-//    if ([self.dateFieldDelegate respondsToSelector:@selector(dateChanged:)]) {
-//        [self.dateFieldDelegate dateChanged:self.picker.date];
-//    }
+-(NSString*)displayValueForSelectedChoice {
+    if (self.selectedChoice)
+        return [self displayValueForChoice:self.selectedChoice];
+    return @"";
 }
+
 @end
