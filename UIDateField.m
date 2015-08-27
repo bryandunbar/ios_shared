@@ -33,11 +33,16 @@
     self.dateStyle = NSDateFormatterShortStyle;
     self.timeStyle = NSDateFormatterShortStyle;
     self.inputView = self.picker;
+    self.hideOnSelection = NO;
+}
+
+-(NSDate*)selectedDate {
+    return self.picker.date;
 }
 -(void)setSelectedDate:(NSDate *)date {
     self.picker.date = date;
-    self.text = [NSDateFormatter localizedStringFromDate:self.picker.date dateStyle:self.dateStyle timeStyle:self.timeStyle];
-
+    [self updateTextField];
+    
 }
 -(UIDatePicker*)picker {
     if (!_picker) {
@@ -53,10 +58,24 @@
 }
 
 -(void)datePickerChanged:(id)sender {
-    self.text = [NSDateFormatter localizedStringFromDate:self.picker.date dateStyle:self.dateStyle timeStyle:self.timeStyle];
+    [self updateTextField];
+    
+    if (self.hideOnSelection)
+        [self resignFirstResponder];
     
     if ([self.dateFieldDelegate respondsToSelector:@selector(dateChanged:)]) {
         [self.dateFieldDelegate dateChanged:self.picker.date];
     }
+}
+
+-(void)updateTextField {
+    if (self.dateFormat) {
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = self.dateFormat;
+        self.text = [formatter stringFromDate:self.picker.date];
+    } else {
+        self.text = [NSDateFormatter localizedStringFromDate:self.picker.date dateStyle:self.dateStyle timeStyle:self.timeStyle];
+    }
+
 }
 @end

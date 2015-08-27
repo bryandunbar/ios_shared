@@ -72,19 +72,23 @@
                                      NSFontAttributeName:[UIFont systemFontOfSize:16]
                                      };
 
-    UIBarButtonItem *nextPrevBtn;
+    UIBarButtonItem *nextPrevBtn = nil;
     if (self.showsNextPrev) {
         nextPrevBtn = [[UIBarButtonItem alloc] initWithCustomView:self.nextPrevSegment];
         [nextPrevBtn setTitleTextAttributes:textAttributes forState:UIControlStateNormal];
-    } else {
-        nextPrevBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     }
     
     UIBarButtonItem *flexibleSpaceLeft = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     UIBarButtonItem *flexibleSpaceright = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     //[doneBtn setTitleTextAttributes:textAttributes forState:UIControlStateNormal];
     
-    NSMutableArray *array = [NSMutableArray arrayWithObjects:nextPrevBtn, flexibleSpaceLeft, flexibleSpaceright, nil];
+    
+    NSMutableArray *array = [NSMutableArray array];
+    if (nextPrevBtn) {
+        [array addObjectsFromArray:@[nextPrevBtn, flexibleSpaceLeft]];
+    }
+    [array addObject:flexibleSpaceright];
+    
     
     if (self.showsDoneButton) {
         UIBarButtonItem *doneBtn =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done:)];

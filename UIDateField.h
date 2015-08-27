@@ -17,8 +17,10 @@
 @property (nonatomic,assign) UIDatePickerMode dateMode;
 @property (nonatomic) NSDateFormatterStyle dateStyle;
 @property (nonatomic) NSDateFormatterStyle timeStyle;
+@property (nonatomic) NSString *dateFormat;
+@property (nonatomic) BOOL hideOnSelection;
 @property (nonatomic,weak) id<UIDateFieldDelegate> dateFieldDelegate;
+@property  (nonatomic,strong) NSDate *selectedDate;
 -(void)initialize;
 
--(void)setSelectedDate:(NSDate*)date;
 @end

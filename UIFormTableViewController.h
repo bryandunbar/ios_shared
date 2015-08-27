@@ -8,8 +8,9 @@
 #import "UIDefaultAccessoryInputView.h"
 
 @interface UIFormTableViewController : UITableViewController <UITextFieldDelegate, UIDefaultAccessoryInputViewDelegate>
--(void)go;
+-(IBAction)go;
 -(void)hideKeyboard;
+-(UIView*)findFirstResponder:(UIView*)view;
 
 @property (nonatomic) BOOL showsDoneButton;
 @end

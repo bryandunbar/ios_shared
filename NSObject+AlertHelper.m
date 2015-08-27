@@ -12,9 +12,9 @@
     [self displayError:title error:e tag:tag cancelButtonTitle:@"OK" otherButtonTitles:otherButtonTitles];
 }
 -(void)displayError:(NSString *)title error:(NSError *)e tag:(NSUInteger)tag cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSArray *)otherButtonTitles {
-	NSString *detailMessage = [[NSString alloc]
-							   initWithFormat:@"%@",
-							   [e.userInfo valueForKey:NSLocalizedDescriptionKey]];
+    
+	NSString *detailMessage = [NSString stringWithFormat:@"%@",
+                               (e.userInfo[NSLocalizedDescriptionKey] != nil ? e.userInfo[NSLocalizedDescriptionKey] : [e description])];
 	
 	if (!detailMessage && detailMessage != NULL) {
 		detailMessage = [[NSString alloc]

@@ -11,7 +11,6 @@
     NSArray *_textFields;
 }
 
--(UIView*)findFirstResponder:(UIView*)view;
 -(UIView*)findNextField:(UIView*)field;
 -(UIView*)findPrevField:(UIView*)field;
 
@@ -29,7 +28,7 @@
     [firstResponder resignFirstResponder];
 }
 
--(void)go {
+-(IBAction)go {
     [self hideKeyboard];
 }
 
